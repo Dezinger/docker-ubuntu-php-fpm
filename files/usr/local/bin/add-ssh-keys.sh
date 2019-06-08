@@ -7,7 +7,7 @@ fi
 
 sleep 1
 
-for FILE in $(ls $SSH_KEYS_DIRECTORY)
+for FILE in $(ls $SSH_KEYS_DIRECTORY | grep -v known_hosts | grep -v config | grep -v .pub)
 do
 	chmod 600 ${SSH_KEYS_DIRECTORY}/${FILE} 1>&2
 	ssh-add ${SSH_KEYS_DIRECTORY}/${FILE} 1>&2

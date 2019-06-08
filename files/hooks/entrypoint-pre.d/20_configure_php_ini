@@ -3,9 +3,15 @@
 echo "Configure php.ini"
 
 PHP_DISPLAY_ERRORS=${PHP_DISPLAY_ERRORS:-"On"}
-PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"256M"}
+PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"512M"}
+PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE:-"256M"}
+PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE:-"256M"}
+PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING:-"E_ALL ^ E_NOTICE ^ E_DEPRECATED ^ E_STRICT ^ E_WARNING"}
 
 sed -i \
     -e "s/^display_errors = Off/display_errors = ${PHP_DISPLAY_ERRORS}/" \
     -e "s/^memory_limit = 128M/memory_limit = ${PHP_MEMORY_LIMIT}/" \
-    /etc/php/${PHP_VERSION}/fpm/php.ini
+    -e "s/^upload_max_filesize = 2M/upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}/" \
+    -e "s/^post_max_size = 8M/post_max_size = ${PHP_POST_MAX_SIZE}/" \
+    -e "s/^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = ${PHP_ERROR_REPORTING}/" \
+    /etc/php/${PHP_VERSION}/cli/php.ini
