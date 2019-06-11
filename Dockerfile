@@ -35,6 +35,8 @@ RUN \
     php$PHP_VERSION-mbstring \
     php$PHP_VERSION-msgpack \
     php$PHP_VERSION-zip \
+    php$PHP_VERSION-soap \
+    php$PHP_VERSION-bcmath \
     php-pear \
     php$PHP_VERSION-dev \
     libmcrypt4 \
@@ -46,7 +48,7 @@ RUN \
     ln -sf /etc/php/$PHP_VERSION/cli/php.ini /etc/php/$PHP_VERSION/fpm/php.ini && \
     ln -sf /etc/php/$PHP_VERSION/mods-available/mcrypt.ini /etc/php/$PHP_VERSION/fpm/conf.d/20-mcrypt.ini && \
     ln -sf /etc/php/$PHP_VERSION/mods-available/mcrypt.ini /etc/php/$PHP_VERSION/cli/conf.d/20-mcrypt.ini && \
-    sed -i -e 's/^listen = \/run\/php\/php5.6-fpm.sock$/listen = 9000/g' /etc/php/$PHP_VERSION/fpm/pool.d/www.conf && \
+    sed -i -e 's/^listen = \/run\/php\/php7.3-fpm.sock$/listen = 9000/g' /etc/php/$PHP_VERSION/fpm/pool.d/www.conf && \
 # print version & modules
     php -v && \
     php -m && \
